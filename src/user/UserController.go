@@ -14,15 +14,23 @@ import (
 
 func UserHandler() {
 	http.HandleFunc("/login", loginController)
+	http.HandleFunc("/register", registerController)
 }
 
 func loginController(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
-	fmt.Println(r)
 	fmt.Println(username, password)
-	er := LoginService(username, password)
+	er := loginService(username, password)
 	data, _ := json.Marshal(er)
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	w.Write(data)
+}
+
+func registerController(w http.ResponseWriter, r *http.Request) {
+	username := r.FormValue("username")
+	password := r.FormValue("password")
+	email := r.FormValue("email")
+	phone := r.FormValue("phone")
+	fmt.Println(username, password, email, phone)
 }
