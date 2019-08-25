@@ -9,6 +9,7 @@ package commons
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"go-web-store-demo/config"
 )
@@ -63,15 +64,16 @@ func (this *MyDataBase) openConn() (err error) {
 
 //关闭数据库链接
 func (this *MyDataBase) CloseConn() {
-	if this.dB != nil {
-		this.dB.Close()
+	if this.rows != nil {
+		this.rows.Close()
 	}
 	if this.stmt != nil {
 		this.stmt.Close()
 	}
-	if this.rows != nil {
-		this.rows.Close()
+	if this.dB != nil {
+		this.dB.Close()
 	}
+
 }
 
 //
@@ -104,16 +106,19 @@ func (this *MyDataBase) Dql(sql string, args ...interface{}) (rows *sql.Rows, er
 	err = this.openConn()
 	if err != nil {
 		//@TODO 日志
+		fmt.Println("打开数据库失败")
 		return
 	}
 	this.stmt, err = this.dB.Prepare(sql)
 	if err != nil {
 		//@TODO
+		fmt.Println("预处理失败")
 		return
 	}
 	rows, err = this.stmt.Query(args...)
 	if err != nil {
 		//@TODO
+		fmt.Println("查询失败")
 		return
 	}
 	//this.CloseConn()//调用此函数要记得关闭
