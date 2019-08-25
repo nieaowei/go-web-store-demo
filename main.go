@@ -9,6 +9,7 @@ package main
 import (
 	"go-web-store-demo/config"
 	_ "go-web-store-demo/src/commons"
+	"go-web-store-demo/src/user"
 	"html/template"
 	"net/http"
 )
@@ -29,5 +30,6 @@ func main() {
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", login)
+	user.UserHandler()
 	server.ListenAndServe()
 }

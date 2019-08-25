@@ -6,12 +6,19 @@
  *******************************************************/
 package user
 
-func LoginService(usern, pwd string) {
-	user := SelectByPwd(usern, pwd)
-	if user != nil {
+import (
+	"fmt"
+	"go-web-store-demo/src/commons"
+)
 
-	} else {
-		//@todo 没有数据
-		return
+func LoginService(usern, pwd string) (res commons.Result) {
+	user := SelectByPwd(usern, pwd)
+	if user != nil { //查询到数据
+		res.Status = 200
+		fmt.Println("200")
+	} else { //没有数据
+		res.Status = 400
+		fmt.Println("400")
 	}
+	return
 }
