@@ -11,7 +11,7 @@ function loginClick() {
                 if (data.status == 200) {
                     alert("登陆成功")
                 } else {
-                    alert("登陆失败")
+                    $("#status").text("账号或密码错误，请重新尝试")
                 }
             },
             "json"
@@ -20,7 +20,24 @@ function loginClick() {
 }
 
 function regesterClick() {
-    alert("提交注册信息")
+    if (checkRegisterInfo()) {
+        $.post("/register",
+            {
+                username: $("#entry_name").val(),
+                password: $("#entry_password").val(),
+                email: $("#entry_email").val(),
+                phone: $("#entry_phone").val(),
+            },
+            function (data, textStatus, jqXHR) {
+                if (data.status == 200) {
+                    alert("登陆成功")
+                } else {
+                    $("#status").text("账号或密码错误，请重新尝试")
+                }
+            },
+            "json"
+        );
+    }
 }
 
 function ToLoginClick() {
@@ -41,6 +58,8 @@ function AtferTo() {
 
 //设置注册所需组件
 function setRegster() {
+    $("#status").text("")
+    $(".containerT").css("top", "40%");
     $(document).unbind('keydown');
     $(document).keydown(function (event) {
         if (event.keyCode == 13) {
@@ -49,7 +68,7 @@ function setRegster() {
     });
     var after = $("#entry_password");
     $("#header1").text("用户注册");
-    $("<input type=\"text\" placeholder=\"手机号码\" id=\"entry_pthone\"> ").insertAfter(after);
+    $("<input type=\"text\" placeholder=\"手机号码\" id=\"entry_phone\"> ").insertAfter(after);
     $("<input type=\"text\" placeholder=\"邮箱\" id=\"entry_email\"> ").insertAfter(after);
     $("#login_btn").attr('onclick', '').unbind('click');
     $("#login_btn").attr('onclick', 'ToLoginClick()').bind('click');
@@ -59,6 +78,8 @@ function setRegster() {
 
 //设置登录所需组件
 function setLogin() {
+    $("#status").text("")
+    $(".containerT").css("top", "50%");
     $(document).unbind('keydown');
     $(document).keydown(function (event) {
         if (event.keyCode == 13) {
@@ -79,10 +100,10 @@ function checkLoginInfo() {
     var name = $("#entry_name").val();
     var password =$("#entry_password").val();
     if(name == ""){
-        alert("用户名不能为空");
+        $("#status").text("账号为空，请输入账号")
         return false
     }else if (password==""){
-        alert("密码不能为空");
+        $("#status").text("密码为空，请输入密码")
         return false
     }else {
         return true
@@ -91,5 +112,19 @@ function checkLoginInfo() {
 
 //检查注册信息
 function checkRegisterInfo() {
+    if ($("#entry_name").val() == "") {
+        $("#status").text("账号为空，请输入账号");
+        return false;
+    } else if ($("#entry_password").val() == "") {
+        $("#status").text("密码为空，请输入密码");
+        return false;
+    } else if ($("#entry_email").val() == "") {
+        $("#status").text("邮箱为空，请输入邮箱");
+        return false;
 
+    } else if ($("#entry_phone").val() == "") {
+        $("#status").text("手机号码为空，请输入手机号码");
+        return false;
+    }
+    return true
 }

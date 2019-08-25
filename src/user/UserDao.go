@@ -7,7 +7,6 @@
 package user
 
 import (
-	"fmt"
 	"go-web-store-demo/src/commons"
 )
 
@@ -17,7 +16,6 @@ func SelectByPwd(usern, pwd string) (user *User) {
 	rows, err := commons.MyDB.Dql(sql, usern, pwd, usern, pwd, usern, pwd)
 	if err != nil {
 		//@todo
-		fmt.Println("查询数据失败，1")
 		return
 	}
 	if rows.Next() {
@@ -25,7 +23,6 @@ func SelectByPwd(usern, pwd string) (user *User) {
 		err = rows.Scan(&user.ID, &user.Username, &user.Password, &user.Phone, &user.Email, &user.Created, &user.Updated)
 		if err != nil {
 			//@todo 查询出错
-			fmt.Println("查询数据失败，2")
 			return nil
 		}
 		commons.MyDB.CloseConn()

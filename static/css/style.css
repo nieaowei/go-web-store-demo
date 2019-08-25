@@ -36,6 +36,18 @@ html,body {
 	color: #df0000
 }
 
+#status {
+    width: 60%;
+    height: 15px;
+    margin: auto auto 5px auto;
+    text-align: center;
+    line-height: 15px;
+    font-family: microsoft yahei, Arial, sans-serif;
+    font-size: 13px;
+    color: #df0000;
+
+}
+
 .containerT {
 	width: 310px;
 	height: auto;
