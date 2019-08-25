@@ -19,8 +19,8 @@ body<div id="container">
 			<form class="form" id="entry_form" action="login">
 				<input type="text" placeholder="用户名" id="entry_name" name="username">
 				<input type="password" placeholder="密码" id="entry_password" name="password">
-				<button type="button" id="login_btn"  onclick="checkLoginInfo()">登录</button>
-				<button type="button" id="register_btn" onclick="registerClick()">注册</button>
+                <button type="button" id="login_btn" onclick="loginClick()">登录</button>
+                <button type="button" id="register_btn" onclick="ToRegisterClick()">注册</button>
 			</form>
 		</div>
 	</div>
@@ -30,8 +30,9 @@ body<div id="container">
 <script type="text/javascript">
     $(function(){
         Victor("container", "output");   //登录背景函数
-		$("#entry_name").focus()
-		$(".containerT").show(1000);
+        $(".containerT").show(1000, function () {
+            $("#entry_name").focus();
+        });
         //绑定回车键
         $(document).keydown(function(event){
             if(event.keyCode==13){
