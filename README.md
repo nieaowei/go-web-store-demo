@@ -1,2 +1,2 @@
-# go-web-store-demo
- goweb开发实战项目
+# 基于Go语言的商城实战项目
+

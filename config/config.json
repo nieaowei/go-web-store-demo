@@ -1,0 +1,12 @@
+{
+  "server":{
+    "addr": "localhost:8080"
+  },
+  "database": {
+    "driver": "mysql",
+    "name": "root",
+    "password": "nieaowei",
+    "table": "ego",
+    "dataSource": "localhost:3306"
+  }
+}

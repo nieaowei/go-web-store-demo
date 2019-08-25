@@ -2,16 +2,13 @@
  *  ProjectName :go-web-store-demo
  *  Author      :nieaowei
  *  Date        :2019-08-24
- *  Notes       :业务逻辑
+ *  Notes       :
  *******************************************************/
-package user
+package commons
 
-func LoginService(usern, pwd string) {
-	user := SelectByPwd(usern, pwd)
-	if user != nil {
-
-	} else {
-		//@todo 没有数据
-		return
-	}
+//客户端服务端交互模板
+type Result struct {
+	Status int         //状态为200成功
+	Data   interface{} //返回数据
+	Msg    string      //返回信息
 }
