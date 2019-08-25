@@ -44,11 +44,11 @@ html,body {
 	top: 50%;
 	left: 50%;
 	margin: -150px 0 0 -156px;
-	border-radius: 3px;
 	border: solid;
 	border-color: #ffdc61;
 	border-width: 2px;
-	border-radius: 5%
+	border-radius: 5%;
+	display: none;
 }
 
 .containerT h1 {
@@ -75,6 +75,7 @@ form input {
 	border: 1px solid rgba(255,255,255,.4);
 	background-color: rgba(255,255,255,.2);
 	width: 200px;
+	height: auto;
 	border-radius: 3px;
 	padding: 8px 15px;
 	margin: 0 auto 10px;
@@ -84,7 +85,8 @@ form input {
 	color: rgb(114, 111, 111);
 	-webkit-transition-duration: .25s;
 	transition-duration: .25s;
-	font-weight: 300
+	font-weight: 300;
+
 }
 
 form input:hover {
@@ -117,10 +119,12 @@ form button {
 	font-size: 16px;
 	font-weight: 700;
 	-webkit-transition-duration: .25s;
-	transition-duration: .25s
+	transition-duration: .25s;
 }
 
 form button:hover {
 	background-color: #f5f7f9;
 	opacity: 0.5;
 }
+
+
