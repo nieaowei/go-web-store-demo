@@ -10,7 +10,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	_ "github.com/go-sql-driver/mysql"
-	"go-web-store-demo/config"
+	"go-web-store-demo/src/config"
 )
 
 type MyDataBase struct {
