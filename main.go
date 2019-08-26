@@ -7,7 +7,7 @@
 package main
 
 import (
-	"go-web-store-demo/config"
+	"go-web-store-demo/src/commons"
 	_ "go-web-store-demo/src/commons"
 	"go-web-store-demo/src/user"
 	"html/template"
@@ -25,11 +25,9 @@ func register(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	server := http.Server{
-		Addr: config.GetConfigData("server")["addr"].(string),
-	}
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/", login)
+	commons.MainRouter.HandleFunc("/", login)
+	commons.MainRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	commons.MainRouter.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.Dir("view"))))
 	user.UserHandler()
-	server.ListenAndServe()
+	http.ListenAndServe(":8080", commons.MainRouter)
 }
