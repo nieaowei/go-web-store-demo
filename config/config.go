@@ -25,10 +25,13 @@ func init() {
 
 //读取配置文件
 func readConfig() (err error) {
-	data, err := ioutil.ReadFile("../config/config.json")
+	data, err := ioutil.ReadFile("./config/config.json")
 	if err != nil {
 		//@todo
-		return
+		data, err = ioutil.ReadFile("../../config/config.json") //用于测试时调用
+		if err != nil {
+			return
+		}
 	}
 	config = data
 	return

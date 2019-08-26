@@ -36,11 +36,9 @@ function regesterClick() {
             },
             function (data, textStatus, jqXHR) {
                 if (data.status == 200) {
-                    $(".containerT").hide(1000, function () {
-                        $(".containerT").remove();
-                    });
+                    $("#status").text("注册成功")
                 } else {
-                    $("#status").text("账号或密码错误，请重新尝试")
+                    $("#status").text("注册失败")
                 }
             },
             "json"

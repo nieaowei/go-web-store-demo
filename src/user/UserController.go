@@ -33,5 +33,8 @@ func registerController(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 	email := r.FormValue("email")
 	phone := r.FormValue("phone")
-	fmt.Println(username, password, email, phone)
+	res := registerService(username, password, email, phone)
+	data, _ := json.Marshal(res)
+	w.Header().Set("Content-Type", "application/json;charset=utf-8")
+	w.Write(data)
 }
