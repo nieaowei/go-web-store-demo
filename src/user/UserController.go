@@ -9,12 +9,13 @@ package user
 import (
 	"encoding/json"
 	"fmt"
+	"go-web-store-demo/src/commons"
 	"net/http"
 )
 
 func UserHandler() {
-	http.HandleFunc("/login", loginController)
-	http.HandleFunc("/register", registerController)
+	commons.MainRouter.HandleFunc("/login", loginController)
+	commons.MainRouter.HandleFunc("/register", registerController)
 }
 
 func loginController(w http.ResponseWriter, r *http.Request) {

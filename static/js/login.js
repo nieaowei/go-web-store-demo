@@ -1,3 +1,7 @@
+function test111() {
+    $(".containerT").css("animation", "myfirst 2s forwards")
+}
+
 function loginClick() {
     if (checkLoginInfo()) {
         var name = $("#entry_name").val();
@@ -9,7 +13,9 @@ function loginClick() {
             },
             function (data, textStatus, jqXHR) {
                 if (data.status == 200) {
-                    alert("登陆成功")
+                    $(".containerT").hide(500, function () {
+                        loadIndexHtml();
+                    });
                 } else {
                     $("#status").text("账号或密码错误，请重新尝试")
                 }
@@ -30,7 +36,9 @@ function regesterClick() {
             },
             function (data, textStatus, jqXHR) {
                 if (data.status == 200) {
-                    alert("登陆成功")
+                    $(".containerT").hide(1000, function () {
+                        $(".containerT").remove();
+                    });
                 } else {
                     $("#status").text("账号或密码错误，请重新尝试")
                 }
@@ -87,7 +95,7 @@ function setLogin() {
         }
     });
     $("#header1").text("用户登录");
-    $("#entry_pthone").remove();
+    $("#entry_phone").remove();
     $("#entry_email").remove();
     $("#login_btn").attr('onclick', '').unbind('click');
     $("#login_btn").attr('onclick', 'loginClick()').bind('click');
@@ -127,4 +135,12 @@ function checkRegisterInfo() {
         return false;
     }
     return true
+}
+
+function loadIndexHtml() {
+    $(".maincontainer").load("/view/index.html", function (respone) {
+        $(".maincontainer").html(respone, function () {
+        });
+    });
+    $(".containerRight").css("animation", "myfirst 3s")
 }

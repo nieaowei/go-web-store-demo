@@ -25,7 +25,7 @@ func init() {
 
 //读取配置文件
 func readConfig() (err error) {
-	data, err := ioutil.ReadFile("./config/config.json")
+	data, err := ioutil.ReadFile("../config/config.json")
 	if err != nil {
 		//@todo
 		return
