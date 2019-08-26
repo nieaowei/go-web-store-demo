@@ -21,6 +21,12 @@ func loginService(usern, pwd string) (res commons.Result) {
 }
 
 func registerService(username, pwd, email, phone string) (res commons.Result) {
-
-	return
+	err := addUserByUPP(username, pwd, email, phone)
+	if err != 0 {
+		res.Status = 400
+		return
+	} else {
+		res.Status = 200
+		return
+	}
 }

@@ -16,3 +16,12 @@ type User struct {
 	Created  string `json:"created"`
 	Updated  string `json:"updated"`
 }
+
+//注册时使用,进行数据查询判断是否存在，返回数据
+const (
+	USEROK = iota
+	USERERROR
+	EXIST_USERNAME
+	EXIST_PHONE
+	EXIST_EMAIL
+)
