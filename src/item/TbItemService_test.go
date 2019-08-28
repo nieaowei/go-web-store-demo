@@ -24,10 +24,10 @@ func Test_showItemSerive(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{
-			"测试",
+			"查询一条记录测试",
 			args{
 				page: 1,
-				row:  2,
+				row:  1,
 			},
 			nil,
 		},
