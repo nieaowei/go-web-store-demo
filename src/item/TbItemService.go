@@ -13,8 +13,10 @@ import (
 
 func showItemSerive(page, row int) (res *commons.Result) {
 	data := selectByPageDao(page, row)
-	if data != nil {
-		fmt.Println(data[0])
+	if data != nil { //查询到数据
+		for i, v := range data {
+			fmt.Println(i, v)
+		}
 		return
 	}
 	return nil

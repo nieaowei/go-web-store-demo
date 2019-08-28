@@ -22,19 +22,26 @@ func loginController(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 	fmt.Println(username, password)
-	er := loginService(username, password)
-	data, _ := json.Marshal(er)
+	user := User{
+		ID:       0,
+		Username: username,
+		Password: password,
+		Phone:    username,
+		Email:    username,
+		Created:  "",
+		Updated:  "",
+	}
+	res := user.LoginVerify()
+	data, _ := json.Marshal(res)
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	w.Write(data)
 }
 
 func registerController(w http.ResponseWriter, r *http.Request) {
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-	email := r.FormValue("email")
-	phone := r.FormValue("phone")
-	res := registerService(username, password, email, phone)
+	user := NewUserByRequest(r) //不知道效率
+	res := user.RegisterVerify()
 	data, _ := json.Marshal(res)
+	fmt.Println(string(data))
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	w.Write(data)
 }

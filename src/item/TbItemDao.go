@@ -12,12 +12,14 @@ import (
 	"go-web-store-demo/src/commons"
 )
 
+/*
+ */
 func selectByPageDao(rows, page int) (data []TbItem) {
-	r, err := commons.MyDB.Dql("select * from tb_item limit ?,?", rows*(page-1), rows)
+	r, err := commons.MyDB.Dql("select * from tb_item limit ?,?", rows*(page-1), rows*page)
 	if err != nil {
 		//@todo
 		fmt.Println(err)
-		return nil
+		return nil //没有查询到数据
 	}
 	for r.Next() {
 		var t TbItem
