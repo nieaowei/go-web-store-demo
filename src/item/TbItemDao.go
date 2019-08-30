@@ -13,9 +13,10 @@ import (
 )
 
 /*
- */
+以rows为一页查询第page页的数据
+*/
 func selectByPageDao(rows, page int) (data []TbItem) {
-	r, err := commons.MyDB.Dql("select * from tb_item limit ?,?", rows*(page-1), rows*page)
+	r, err := commons.MyDB.Dql("select * from tb_item limit ?,?", rows*(page-1), rows)
 	if err != nil {
 		//@todo
 		fmt.Println(err)
