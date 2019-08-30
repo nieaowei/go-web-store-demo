@@ -7,15 +7,15 @@
 package item
 
 type TbItem struct {
-	ID         int64
-	Title      string
-	Sell_point string
-	Price      int64
-	Num        int64
-	Barcode    string
-	Image      string
-	Cid        int
-	Status     int8
-	Created    string
-	Updated    string
+	ID         int64  `json:"id"`
+	Title      string `json:"title"`
+	Sell_point string `json:"sell_point"`
+	Price      int64  `json:"price"`
+	Num        int64  `json:"num"`
+	Barcode    string `json:"barcode"`
+	Image      string `json:"image"`
+	Cid        int    `json:"cid"`
+	Status     int8   `json:"status"`
+	Created    string `json:"created"`
+	Updated    string `json:"updated"`
 }

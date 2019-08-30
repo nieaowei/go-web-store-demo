@@ -49,7 +49,7 @@ const (
 func NewUserByRequest(r *http.Request) (user *User) {
 	err := r.ParseForm()
 	if err != nil {
-		return nil
+		return
 	}
 	user = new(User)
 	data, _ := json.Marshal(r.Form)
@@ -59,5 +59,11 @@ func NewUserByRequest(r *http.Request) (user *User) {
 	if err != nil {
 		return nil
 	}
+	//if !user.MatchPhone(){
+	//	return nil
+	//}
+	//if !user.MatchEmail(){
+	//	return nil
+	//}
 	return
 }

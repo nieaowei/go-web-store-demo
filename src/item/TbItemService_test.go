@@ -24,7 +24,7 @@ func Test_showItemSerive(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{
-			"查询一条记录测试",
+			"以1行为1页查询第一页数据",
 			args{
 				page: 1,
 				row:  1,

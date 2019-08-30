@@ -136,9 +136,10 @@ function checkRegisterInfo() {
 }
 
 function loadIndexHtml() {
-    $(".maincontainer").load("/view/index.html", function (respone) {
-        $(".maincontainer").html(respone, function () {
+    $("#maincontainer").load("/view/index.html", function (respone) {
+        $("#maincontainer").html(respone, function () {
         });
     });
-    $(".containerRight").css("animation", "myfirst 3s")
+    //$(".containerRight").css("animation", "myfirst 3s")
 }
+

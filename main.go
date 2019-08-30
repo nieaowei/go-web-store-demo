@@ -9,6 +9,7 @@ package main
 import (
 	"go-web-store-demo/src/commons"
 	_ "go-web-store-demo/src/commons"
+	"go-web-store-demo/src/item"
 	"go-web-store-demo/src/user"
 	"html/template"
 	"net/http"
@@ -29,5 +30,6 @@ func main() {
 	commons.MainRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	commons.MainRouter.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.Dir("view"))))
 	user.UserHandler()
+	item.TbItemHandler()
 	http.ListenAndServe(":8080", commons.MainRouter)
 }

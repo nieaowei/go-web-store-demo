@@ -7,6 +7,7 @@
 package item
 
 import (
+	"go-web-store-demo/src/commons"
 	"reflect"
 	"testing"
 )
@@ -76,6 +77,19 @@ func Test_selectByPageDao(t *testing.T) {
 					"2019-08-27 23:10:19",
 					"2019-08-27 23:10:20",
 				},
+				{
+					4,
+					"iphone4",
+					"weqioii",
+					1000,
+					100,
+					"",
+					"",
+					13,
+					1,
+					"2019-08-28 12:36:37",
+					"2019-08-28 12:36:43",
+				},
 			},
 		},
 	}
@@ -83,6 +97,30 @@ func Test_selectByPageDao(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotData := selectByPageDao(tt.args.rows, tt.args.page); !reflect.DeepEqual(gotData, tt.wantData) {
 				t.Errorf("selectByPageDao() = %v, want %v", gotData, tt.wantData)
+			}
+		})
+	}
+}
+
+func Test_getTotal(t *testing.T) {
+	tests := []struct {
+		name    string
+		wantRes commons.Result
+	}{
+		// TODO: Add test cases.
+		{
+			"获取总条数",
+			commons.Result{
+				Status: 200,
+				Data:   "13",
+				Msg:    "",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRes := getTotal(); !reflect.DeepEqual(gotRes, tt.wantRes) {
+				t.Errorf("getTotal() = %v, want %v", gotRes, tt.wantRes)
 			}
 		})
 	}
