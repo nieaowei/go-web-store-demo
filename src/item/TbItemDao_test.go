@@ -95,8 +95,8 @@ func Test_selectByPageDao(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotData := selectByPageDao(tt.args.rows, tt.args.page); !reflect.DeepEqual(gotData, tt.wantData) {
-				t.Errorf("selectByPageDao() = %v, want %v", gotData, tt.wantData)
+			if gotData := selectByPage(tt.args.rows, tt.args.page); !reflect.DeepEqual(gotData, tt.wantData) {
+				t.Errorf("selectByPage() = %v, want %v", gotData, tt.wantData)
 			}
 		})
 	}
@@ -121,6 +121,78 @@ func Test_getTotal(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotRes := getTotal(); !reflect.DeepEqual(gotRes, tt.wantRes) {
 				t.Errorf("getTotal() = %v, want %v", gotRes, tt.wantRes)
+			}
+		})
+	}
+}
+
+func Test_addByItem(t *testing.T) {
+	type args struct {
+		item TbItem
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantRes commons.Result
+	}{
+		// TODO: Add test cases.
+		{
+			"增加一条数据测试",
+			args{item: TbItem{
+				ID:         100,
+				Title:      "iohon",
+				Sell_point: "wads",
+				Price:      100,
+				Num:        10,
+				Barcode:    "",
+				Image:      "",
+				Cid:        0,
+				Status:     0,
+				Created:    "",
+				Updated:    "",
+			}},
+			commons.Result{
+				Status: 200,
+				Data:   nil,
+				Msg:    "",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRes := addByItem(tt.args.item); !reflect.DeepEqual(gotRes, tt.wantRes) {
+				t.Errorf("addByItem() = %v, want %v", gotRes, tt.wantRes)
+			}
+		})
+	}
+}
+
+func Test_alterById(t *testing.T) {
+	type args struct {
+		id    interface{}
+		key   string
+		value interface{}
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantRes int64
+	}{
+		// TODO: Add test cases.
+		{
+			"更改状态测试",
+			args{
+				id:    4,
+				key:   "status",
+				value: 3,
+			},
+			1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRes := alterById(tt.args.id, tt.args.key, tt.args.value); gotRes != tt.wantRes {
+				t.Errorf("alterById() = %v, want %v", gotRes, tt.wantRes)
 			}
 		})
 	}

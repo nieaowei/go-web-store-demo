@@ -7,6 +7,7 @@ var Main=new Vue({
         total:15,
         pagesize:10,
         currentPage:1,
+        loading: false,
     },
     methods: {
         pageChanged(page){
@@ -21,12 +22,12 @@ var Main=new Vue({
         },
         handleClick() {
             var that = this;
+            Main.loading=true
             $.post("/getTotal",
                 {},
                 function (data) {
                     if(data.status==200){
                         Main.total=data.data
-                        console.log(data.data)
                     }
                 },
                 "json"
@@ -39,7 +40,7 @@ var Main=new Vue({
                 function (data, textStatus, jqXHR) {
                     if (data.status == 200) {
                         Main.tableData=data.data
-                        console.log(Main.tableData)
+                        Main.loading=false
                     }
                 },
                 "json"
