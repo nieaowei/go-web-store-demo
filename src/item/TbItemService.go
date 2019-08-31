@@ -12,7 +12,7 @@ import (
 )
 
 func showItemSerive(rows, page int) (res commons.Result) {
-	data := selectByPageDao(rows, page)
+	data := selectByPage(rows, page)
 	if data != nil { //查询到数据
 		for i, v := range data {
 			fmt.Println(i, v)

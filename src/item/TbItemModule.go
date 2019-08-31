@@ -19,3 +19,8 @@ type TbItem struct {
 	Created    string `json:"created"`
 	Updated    string `json:"updated"`
 }
+
+type TbItemChild struct {
+	TbItem
+	CategoryName string
+}

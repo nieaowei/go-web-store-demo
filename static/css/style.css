@@ -65,7 +65,7 @@ html,body {
 	left: 50%;
 	margin: -150px 0 0 -156px;
 	border: solid;
-	border-color: #ffdc61;
+	border-color: #8282fc;
 	border-width: 2px;
 	border-radius: 5%;
 	display: none;
@@ -168,7 +168,7 @@ form button {
 	-moz-appearance: none;
 	appearance: none;
 	outline: 0;
-	background-color: #ffbb53;
+	background-color: #8282fc;
 	border: 3px;
 	border-color: #fff;
 	opacity: 0.7;
@@ -243,17 +243,8 @@ form button:hover {
 /*.el-submenu{*/
 /*	max-width: 100px;*/
 /*}*/
-.demo-table-expand {
-	font-size: 0;
-}
-.demo-table-expand label {
-	width: 90px;
-	color: #99a9bf;
-}
-.demo-table-expand .el-form-item {
-	margin-right: 0;
-	margin-bottom: 0;
-	width: 50%;
-}
+
+
+
 
 

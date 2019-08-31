@@ -1,15 +1,16 @@
+
+<link rel="stylesheet" type="text/css" href="/static/css/temp.css">
+
 <el-container >
-    <el-aside class="index-aside" style="border: solid;width: auto;height: 100%">
+    <el-aside class="index-aside" style=" width: auto;height: 100%">
         <el-row class="tac">
             <el-col :span="12">
                 <el-menu
-                        style="min-width:200px;background:transparent"
-                        class="menu1"
+                        style="min-width:200px;border-right: none"
+                        background-color="transparent"
                         default-active="2"
                         class="el-menu-vertical-demo"
                         text-color="#000000"
-                        @open="handleOpen"
-                        @close="handleClose"
                         :default-openeds="openeds">
                     <el-submenu index="1">
                         <template slot="title">
@@ -19,9 +20,7 @@
                             <el-menu-item index="1-1" @click="handleClick">查询商品</el-menu-item>
                             <el-menu-item index="1-2">新增商品</el-menu-item>
                             <el-menu-item index="1-3">选项3</el-menu-item>
-                            <el-menu-item index="1-4">
-                                <template slot="title">选项4</template>
-                            </el-menu-item>
+                            <el-menu-item index="1-4">选项4</el-menu-item>
                     </el-submenu>
                     <el-menu-item index="2">
                         <i class="el-icon-menu"></i>
@@ -44,36 +43,14 @@
         </el-header>
         <el-main class="mainside" style="border: solid;height:100%;width: 100%;">
             <el-table
+                    style="background-color:transparent;margin: auto;border-bottom: none;"
+                    header-cell-style="background:#65c4ff;color:#000000;border:0;opacity:0.5"
+                    header-row-style="background:transparent;color:#000000;"
+                    row-style="background-color:transparent;color:#000000;"
+                    cell-style="background:transparent;color:#000000;border-bottom:1px solid #65c4ff"
                     :data="tableData"
-                    style="width: 100%"
-                    max-height=auto>
-                <el-table-column type="expand">
-                    <template slot-scope="props">
-                        <el-form label-position="left" inline class="demo-table-expand">
-                            <el-form-item label="商品名称">
-                                <span>{{ props.row.title }}</span>
-                            </el-form-item>
-                            <el-form-item label="所属店铺">
-                                <span>{{ props.row.shop }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品 ID">
-                                <span>{{ props.row.id }}</span>
-                            </el-form-item>
-                            <el-form-item label="店铺 ID">
-                                <span>{{ props.row.shopId }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品分类">
-                                <span>{{ props.row.category }}</span>
-                            </el-form-item>
-                            <el-form-item label="店铺地址">
-                                <span>{{ props.row.address }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品描述">
-                                <span>{{ props.row.sell_point }}</span>
-                            </el-form-item>
-                        </el-form>
-                    </template>
-                </el-table-column>
+                    height="530px"
+                    v-loading="loading">
                 <el-table-column
                         label="商品 ID"
                         prop="id">
@@ -106,8 +83,6 @@
             </el-pagination>
 
         </el-main>
-        <el-footer style="height: 100px;border: solid;float: bottom">Footer
-        </el-footer>
     </el-container>
  </el-container>
  <script src="/static/js/main.js"></script>

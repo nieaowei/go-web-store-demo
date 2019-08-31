@@ -1,0 +1,4 @@
+.el-table__row:hover{
+    opacity: 0.8;
+    border: 1px solid #df0000;
+}
