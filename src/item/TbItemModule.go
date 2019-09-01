@@ -6,6 +6,12 @@
  *******************************************************/
 package item
 
+import (
+	"encoding/json"
+	"net/http"
+	"strings"
+)
+
 type TbItem struct {
 	ID         int64  `json:"id"`
 	Title      string `json:"title"`
@@ -23,4 +29,21 @@ type TbItem struct {
 type TbItemChild struct {
 	TbItem
 	CategoryName string
+}
+
+//Returns nil if the operation fails,otherwise returns data successfully.
+func NewTbItemByRequest(r *http.Request) (res *TbItem) {
+	err := r.ParseForm()
+	if err != nil {
+		return nil
+	}
+	res = new(TbItem)
+	data, err := json.Marshal(r.Form)
+	tempStr := strings.ReplaceAll(string(data), "[", "")
+	tempStr = strings.ReplaceAll(tempStr, "]", "")
+	err = json.Unmarshal([]byte(tempStr), res)
+	if err != nil {
+		return nil
+	}
+	return
 }

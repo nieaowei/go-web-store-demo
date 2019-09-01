@@ -6,7 +6,9 @@
  *******************************************************/
 package commons
 
-import "github.com/gorilla/mux"
+import (
+	"github.com/gorilla/mux"
+)
 
 //客户端服务端交互模板
 type Result struct {

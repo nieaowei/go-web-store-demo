@@ -15,7 +15,8 @@ import (
 
 func TbItemHandler() {
 	commons.MainRouter.HandleFunc("/showItem", showItemController)
-	commons.MainRouter.HandleFunc("/getTotal", getTotalController)
+	commons.MainRouter.HandleFunc("/getTotalService", getTotalController)
+	commons.MainRouter.HandleFunc("/addItem", addItemByItemController)
 }
 
 func showItemController(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +28,14 @@ func showItemController(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTotalController(w http.ResponseWriter, r *http.Request) {
-	res := getTotal()
+	res := getTotalService()
+	data, _ := json.Marshal(res)
+	w.Write(data)
+}
+
+func addItemByItemController(w http.ResponseWriter, r *http.Request) {
+	item := NewTbItemByRequest(r)
+	res := addItemByItemService(item)
 	data, _ := json.Marshal(res)
 	w.Write(data)
 }
