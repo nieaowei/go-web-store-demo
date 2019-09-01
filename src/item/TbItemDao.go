@@ -10,6 +10,7 @@ import (
 	"database/sql"
 	"fmt"
 	"go-web-store-demo/src/commons"
+	"math/rand"
 	"time"
 )
 
@@ -37,20 +38,25 @@ func selectByPage(rows, page int) (data []TbItem) {
 	return
 }
 
-func addByItem(item TbItem) (res commons.Result) {
+func generateItemId() (id int64) {
+	rand.Seed(time.Now().UnixNano())
+	id = rand.Int63n(10000000)
+	fmt.Println(id)
+	return
+}
+
+func addByItem(item *TbItem) (res int) {
 	sql := "insert into tb_item values(?,?,?,?,?,?,?,?,default,?,?)"
 	timeStr := time.Now().Format("2006-01-02 15:04:05")
 	r, err := commons.MyDB.Dml(sql, item.ID, item.Title, item.Sell_point, item.Price, item.Num, item.Barcode, item.Image, item.Cid, timeStr, timeStr)
-	res.Status = 400
 	if err != nil {
 		//@todo
 		fmt.Println(err)
-		return
+		return -1
 	}
 	if r < 0 {
-		return
+		return -1
 	}
-	res.Status = 200
 	return
 }
 

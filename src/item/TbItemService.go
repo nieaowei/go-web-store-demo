@@ -25,7 +25,7 @@ func showItemSerive(rows, page int) (res commons.Result) {
 	return
 }
 
-func getTotal() (res commons.Result) {
+func getTotalService() (res commons.Result) {
 	r, err := commons.MyDB.Dql("select count(*) from tb_item")
 	if err != nil {
 		fmt.Println(err)
@@ -37,5 +37,17 @@ func getTotal() (res commons.Result) {
 		r.Scan(&res.Data)
 	}
 	commons.MyDB.CloseConn()
+	return
+}
+
+func addItemByItemService(item *TbItem) (res commons.Result) {
+	item.ID = generateItemId()
+	lenth := addByItem(item)
+	res.Status = 400
+	if lenth != 0 {
+		//增加失败
+		return
+	}
+	res.Status = 200
 	return
 }

@@ -119,8 +119,8 @@ func Test_getTotal(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if gotRes := getTotal(); !reflect.DeepEqual(gotRes, tt.wantRes) {
-				t.Errorf("getTotal() = %v, want %v", gotRes, tt.wantRes)
+			if gotRes := getTotalService(); !reflect.DeepEqual(gotRes, tt.wantRes) {
+				t.Errorf("getTotalService() = %v, want %v", gotRes, tt.wantRes)
 			}
 		})
 	}
@@ -193,6 +193,26 @@ func Test_alterById(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotRes := alterById(tt.args.id, tt.args.key, tt.args.value); gotRes != tt.wantRes {
 				t.Errorf("alterById() = %v, want %v", gotRes, tt.wantRes)
+			}
+		})
+	}
+}
+
+func Test_generateItemId(t *testing.T) {
+	tests := []struct {
+		name   string
+		wantId int64
+	}{
+		// TODO: Add test cases.
+		{
+			"生成随机数测试",
+			100,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotId := generateItemId(); gotId != tt.wantId {
+				t.Errorf("generateItemId() = %v, want %v", gotId, tt.wantId)
 			}
 		})
 	}
