@@ -44,7 +44,7 @@ func loginService(usern, pwd string) (res commons.Result) {
 //	}
 //}
 
-//以下作为数据验证判断功能
+//
 func matchEmail(email string) (res bool) {
 	res, _ = regexp.MatchString(`^([\w\.\_]{2,})@(\w{1,})(\.[\w]+)+$`, email)
 	return
@@ -55,6 +55,9 @@ func matchPhone(phone string) (res bool) {
 	return
 }
 
+/*
+	To verify that the user's account and password match.
+*/
 func (u *User) LoginVerify() (res commons.Result) {
 	res.Status = 200
 	switch {
@@ -78,6 +81,9 @@ func (u *User) LoginVerify() (res commons.Result) {
 	return
 }
 
+/*
+	Format matching the mailbox and mobile phone number ,and call the database opration to add a user.
+*/
 func (u *User) RegisterVerify() (res commons.Result) {
 	if !u.MatchEmail() {
 		res.Status = DATA_EMAIL_ERROR
@@ -105,11 +111,13 @@ func (u *User) RegisterVerify() (res commons.Result) {
 	return
 }
 
+/*
+	Use regular expressions to match whether the data satisfies the format.
+*/
 func (u *User) MatchEmail() (res bool) {
 	res, _ = regexp.MatchString(`^([\w\.\_]{2,})@(\w{1,})(\.[\w]+)+$`, u.Email)
 	return
 }
-
 func (u *User) MatchPhone() (res bool) {
 	res, _ = regexp.MatchString(`^(1[3|4|5|6|7|8|9][0-9][\d]{8})$`, u.Phone)
 	return

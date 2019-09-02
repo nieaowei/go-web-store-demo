@@ -12,6 +12,7 @@ import (
 	"strings"
 )
 
+//The goods record model.
 type TbItem struct {
 	ID         int64  `json:"id"`
 	Title      string `json:"title"`
@@ -26,6 +27,7 @@ type TbItem struct {
 	Updated    string `json:"updated"`
 }
 
+//
 type TbItemChild struct {
 	TbItem
 	CategoryName string

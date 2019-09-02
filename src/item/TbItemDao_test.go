@@ -112,7 +112,7 @@ func Test_getTotal(t *testing.T) {
 			"获取总条数",
 			commons.Result{
 				Status: 200,
-				Data:   "13",
+				Data:   int64(17),
 				Msg:    "",
 			},
 		},
@@ -126,47 +126,8 @@ func Test_getTotal(t *testing.T) {
 	}
 }
 
-func Test_addByItem(t *testing.T) {
-	type args struct {
-		item TbItem
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantRes commons.Result
-	}{
-		// TODO: Add test cases.
-		{
-			"增加一条数据测试",
-			args{item: TbItem{
-				ID:         100,
-				Title:      "iohon",
-				Sell_point: "wads",
-				Price:      100,
-				Num:        10,
-				Barcode:    "",
-				Image:      "",
-				Cid:        0,
-				Status:     0,
-				Created:    "",
-				Updated:    "",
-			}},
-			commons.Result{
-				Status: 200,
-				Data:   nil,
-				Msg:    "",
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if gotRes := addByItem(tt.args.item); !reflect.DeepEqual(gotRes, tt.wantRes) {
-				t.Errorf("addByItem() = %v, want %v", gotRes, tt.wantRes)
-			}
-		})
-	}
-}
-
+//The desired result is 1,but a result of 0 does not mean that the function is wrong,but the
+//data that needs to be modified is the same as the data being modified
 func Test_alterById(t *testing.T) {
 	type args struct {
 		id    interface{}
@@ -213,6 +174,43 @@ func Test_generateItemId(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if gotId := generateItemId(); gotId != tt.wantId {
 				t.Errorf("generateItemId() = %v, want %v", gotId, tt.wantId)
+			}
+		})
+	}
+}
+
+func Test_addByItem(t *testing.T) {
+	type args struct {
+		item *TbItem
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantRes int
+	}{
+		// TODO: Add test cases.
+		{
+			"增加一条记录测试",
+			args{&TbItem{
+				ID:         generateItemId(),
+				Title:      "nnoqwndqno",
+				Sell_point: "dewohdqleuhrqiere",
+				Price:      10,
+				Num:        10,
+				Barcode:    "",
+				Image:      "",
+				Cid:        13,
+				Status:     1,
+				Created:    "",
+				Updated:    "",
+			}},
+			0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotRes := addByItem(tt.args.item); gotRes != tt.wantRes {
+				t.Errorf("addByItem() = %v, want %v", gotRes, tt.wantRes)
 			}
 		})
 	}

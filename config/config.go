@@ -23,12 +23,14 @@ func init() {
 	}
 }
 
-//读取配置文件
+/*
+Read configuration file.
+*/
 func readConfig() (err error) {
 	data, err := ioutil.ReadFile("./config/config.json")
 	if err != nil {
 		//@todo
-		data, err = ioutil.ReadFile("../../config/config.json") //用于测试时调用
+		data, err = ioutil.ReadFile("../../config/config.json") //Used during testing.
 		if err != nil {
 			return
 		}
@@ -37,7 +39,9 @@ func readConfig() (err error) {
 	return
 }
 
-//获取key相关配置的map
+/*
+Get the relevant configuration in the configuration file according to key.
+*/
 func GetConfigData(key string) (res map[string]interface{}) {
 	temp := make(map[string]interface{})
 	err := json.Unmarshal(config, &temp)

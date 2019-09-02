@@ -15,7 +15,7 @@ import (
 
 func TbItemHandler() {
 	commons.MainRouter.HandleFunc("/showItem", showItemController)
-	commons.MainRouter.HandleFunc("/getTotalService", getTotalController)
+	commons.MainRouter.HandleFunc("/getTotal", getTotalController)
 	commons.MainRouter.HandleFunc("/addItem", addItemByItemController)
 }
 

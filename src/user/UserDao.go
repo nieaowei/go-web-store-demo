@@ -13,7 +13,10 @@ import (
 	"time"
 )
 
-//通过密码去查询数据，查询出错返回nil，没有查询到数据返回nil
+/*
+Query data in the database by account number and password .
+Return nil if the query has an error or the data does not exist.
+*/
 func selectByPwd(usern, pwd string) (user *User) {
 	sql := "select * from tb_user where username=? and password=? or email=? and password=? or phone=? and password=?"
 	rows, err := commons.MyDB.Dql(sql, usern, pwd, usern, pwd, usern, pwd)
@@ -34,7 +37,11 @@ func selectByPwd(usern, pwd string) (user *User) {
 	return
 }
 
-//通过用户名，密码，手机号码，电子邮箱去新增一条记录，并且逐级判断关键键值是否存在，由于
+/*
+Add a record to the database based on the user object and be able to analyze the error.
+According to the return value , you can know the cause of the error and can handle it
+according to different reasons
+*/
 func addUserByUPP(u *User) int8 {
 	/*
 		下列操作效率低
@@ -70,15 +77,19 @@ func addUserByUPP(u *User) int8 {
 	//	commons.MyDB.CloseConn()
 	//	return EXIST_EMAIL
 	//}
-	//如果存在就无法执行下面语句
-	//以下通过分析错误信息，简化了代码
+	//If result is existed, the following code will be not run.
+
+	// The following code implements the function of error location bt analyzing the error information.
+	//And improve operational efficiency.
 	sql := "insert into tb_user values(default,?,?,?,?,?,?)"
 	timeStr := time.Now().Format("2006-01-02 15:04:05")
 	lenth, err := commons.MyDB.Dml(sql, u.Username, u.Password, u.Phone, u.Email, timeStr, timeStr)
 	if err != nil { //解析错误
 		r, _ := regexp.Compile("'[a-zA-Z0-9]+'")
 		temp := r.FindAllString(fmt.Sprintf("%s", err), 2)
-		switch temp[len(temp)-1] { //在这里有一个小坑，不能直接去判断temp[2]，直接判断会产生恐慌，所以需要取长度取进行判断
+		switch temp[len(temp)-1] {
+		// There are a point in here,you should not judge temp[2] directly,otherwise result in panic.
+		// The solution is to take the judgment by acquiring the length of the data slice.
 		case "'username'":
 			return EXIST_USERNAME
 		case "'phone'":

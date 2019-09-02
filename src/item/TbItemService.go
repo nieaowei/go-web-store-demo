@@ -13,7 +13,7 @@ import (
 
 func showItemSerive(rows, page int) (res commons.Result) {
 	data := selectByPage(rows, page)
-	if data != nil { //查询到数据
+	if data != nil { //Hava data.
 		for i, v := range data {
 			fmt.Println(i, v)
 		}
@@ -45,7 +45,7 @@ func addItemByItemService(item *TbItem) (res commons.Result) {
 	lenth := addByItem(item)
 	res.Status = 400
 	if lenth != 0 {
-		//增加失败
+		//@todo
 		return
 	}
 	res.Status = 200
