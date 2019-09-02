@@ -23,7 +23,9 @@ type User struct {
 	Updated  string `json:"updated"`
 }
 
-//注册时使用,进行数据查询判断是否存在，返回数据
+/*
+Some return values for the registration function.
+*/
 const (
 	USEROK = iota
 	USERERROR
@@ -36,15 +38,7 @@ const (
 )
 
 /*
-通过请求的参数去创建用户对象,暂时不知道该方式的效率
-//r.ParseForm()
-//qq,_:= json.Marshal(r.Form)
-//tempStr:=strings.ReplaceAll(string(qq),"[","")
-//tempStr = strings.ReplaceAll(tempStr,"]","")
-//fmt.Println(tempStr)
-//user := User{}
-//json.Unmarshal([]byte(tempStr),&user)
-//fmt.Println(user)
+	To create a User object by request, I don't know the efficiency of this method for the time being.
 */
 func NewUserByRequest(r *http.Request) (user *User) {
 	err := r.ParseForm()
@@ -59,6 +53,7 @@ func NewUserByRequest(r *http.Request) (user *User) {
 	if err != nil {
 		return nil
 	}
+	// The following code has relized in other function.
 	//if !user.MatchPhone(){
 	//	return nil
 	//}

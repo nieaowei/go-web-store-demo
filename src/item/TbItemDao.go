@@ -14,21 +14,20 @@ import (
 	"time"
 )
 
-/*
-以rows为一页查询第page页的数据
-*/
+//The first page of the record is queried  with a page line record as a page.
+//Returns nil if no data is querired,otherwise returns the data slice of the query.
 func selectByPage(rows, page int) (data []TbItem) {
 	r, err := commons.MyDB.Dql("select * from tb_item limit ?,?", rows*(page-1), rows)
 	if err != nil {
 		//@todo
 		fmt.Println(err)
-		return nil //没有查询到数据
+		return nil //no data
 	}
 	for r.Next() {
 		var t TbItem
 		var s sql.NullString
 		var s1 sql.NullString
-		//如果直接使用t.barcode 由于数据库为null会导致填充失败
+		//Since the data in the database is null ,if you use t.barcide directly ,it will casuse the operation to fail.
 		r.Scan(&t.ID, &t.Title, &t.Sell_point, &t.Price, &t.Num, &s, &s1, &t.Cid, &t.Status, &t.Created, &t.Updated)
 		t.Barcode = s.String
 		t.Image = s1.String
@@ -38,6 +37,8 @@ func selectByPage(rows, page int) (data []TbItem) {
 	return
 }
 
+//Genereate a random number for use by the primary key
+
 func generateItemId() (id int64) {
 	rand.Seed(time.Now().UnixNano())
 	id = rand.Int63n(10000000)
@@ -45,9 +46,10 @@ func generateItemId() (id int64) {
 	return
 }
 
+//Add a record to the table by *TbItem
 func addByItem(item *TbItem) (res int) {
-	sql := "insert into tb_item values(?,?,?,?,?,?,?,?,default,?,?)"
-	timeStr := time.Now().Format("2006-01-02 15:04:05")
+	sql := "insert into tb_item values(?,?,?,?,?,?,?,?,default,?,?)" //The default status is 1.  normal.
+	timeStr := time.Now().Format("2006-01-02 15:04:05")              //Current time.
 	r, err := commons.MyDB.Dml(sql, item.ID, item.Title, item.Sell_point, item.Price, item.Num, item.Barcode, item.Image, item.Cid, timeStr, timeStr)
 	if err != nil {
 		//@todo
@@ -60,12 +62,11 @@ func addByItem(item *TbItem) (res int) {
 	return
 }
 
-//通过id去更改相应的数据，返回-1失败  0也是失败  成功会返回成功的长度 1 如果更改的数据与
-//原值相同返回0
+//The desired result is 1,but a result of 0 does not mean that the function is wrong,but the
+//data that needs to be modified is the same as the data being modified
 func alterById(id interface{}, key string, value interface{}) (res int64) {
 	sql := "update tb_item set "
 	sql += key + "=? where id=?"
-	fmt.Println(sql)
 	res, err := commons.MyDB.Dml(sql, value, id)
 	if err != nil {
 		fmt.Println(err)
